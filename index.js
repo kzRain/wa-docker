@@ -29,7 +29,10 @@ client.on('message', msg => {
 
     } else if (msg.body === '!ping') {
         // Send a new message to the same chat
-        client.sendMessage(msg.from, 'pong');
+        client.sendMessage(msg.from, '*pong*');
+        client.sendMessage(msg.from, '_pong_');
+        client.sendMessage(msg.from, '-pong-');
+        client.sendMessage(msg.from, '```pong```');
     }
     //  else if (msg.body.startsWith('!sendto ')) {
     //     // Direct send a new message to specific id
@@ -207,7 +210,24 @@ function handleMessage(e) {
     let i;
     let obj = JSON.parse(e);
     // let filePath;
-    if (obj.type === 'sendWa') {
+    if (obj.type === 'send_message') {
+        let numbers = obj.data
+        let options = {}
+        for (i in numbers) {
+            options = numbers[i].options !== undefined ? numbers[i].options : {}
+            client.sendMessage(`${numbers[i].number}@c.us`, numbers[i].message, options)
+        }
+    } else if (obj.type === 'checkWa') {
+        let numbers = obj.data
+        client.isRegisteredUser(numbers[0].to).then(rs => {
+                wss.clients.forEach(function each(cli) {
+                    if (cli.readyState === WebSocket.OPEN) {
+                        cli.send(JSON.stringify({result: rs}));
+                    }
+                });
+            }
+        );
+    } else if (obj.type === 'sendWa') {
         //  let validType = ['text', 'image', 'document', 'location', 'video']
         let numbers = obj.data
         let options = {}
@@ -247,15 +267,5 @@ function handleMessage(e) {
             client.sendMessage(numbers[i].to, numbers[i].message, options)
         }
         tmpAttachment = {}
-    } else if (obj.type === 'checkWa') {
-        let numbers = obj.data
-        client.isRegisteredUser(numbers[0].to).then(rs => {
-                wss.clients.forEach(function each(cli) {
-                    if (cli.readyState === WebSocket.OPEN) {
-                        cli.send(JSON.stringify({result: rs}));
-                    }
-                });
-            }
-        );
     }
 }
