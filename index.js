@@ -21,15 +21,15 @@ client.on('ready', () => {
     console.log('Client is ready!');
 });
 
-client.on('message', async msg => {
+client.on('message', msg => {
     console.log('MESSAGE RECEIVED', msg);
     if (msg.body === '!ping reply') {
         // Send a new message as a reply to the current one
-        await msg.reply('pong');
+        msg.reply('pong');
 
     } else if (msg.body === '!ping') {
         // Send a new message to the same chat
-        await client.sendMessage(msg.from, 'pong');
+        client.sendMessage(msg.from, 'pong');
     }
     //  else if (msg.body.startsWith('!sendto ')) {
     //     // Direct send a new message to specific id
@@ -198,12 +198,12 @@ const wss = new webSocket.Server({
 })
 
 wss.on('connection', ws => {
-    ws.on('message', async message => {
-        await handleMessage(message);
+    ws.on('message', message => {
+        handleMessage(message);
     })
 });
 
-async function handleMessage(e) {
+function handleMessage(e) {
     let i;
     let obj = JSON.parse(e);
     // let filePath;
@@ -244,7 +244,7 @@ async function handleMessage(e) {
             //     }
             // }
 
-            await client.sendMessage(numbers[i].to, numbers[i].message, options)
+            client.sendMessage(numbers[i].to, numbers[i].message, options)
         }
         tmpAttachment = {}
     } else if (obj.type === 'checkWa') {
