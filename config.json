@@ -2,8 +2,9 @@
     "webserviceUrl": "http://localhost:8000/api/",
     "websocketPort": 7777,
     "puppeteer": {
-        "headless": false,
-        "executablePath": "/opt/google/chrome/chrome"
+        "headless": true,
+        "executablePath": "/opt/google/chrome/chrome",
+        "args": ["--no-sandbox"]
     },
     "folderDownload": "upload",
     "mimetypeCaption": [
