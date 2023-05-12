@@ -1,0 +1,7 @@
+version: '3'
+services:
+  wa-docker:
+    image: wa-helper
+    restart: on-failure
+    ports:
+      - "7777:7777"
