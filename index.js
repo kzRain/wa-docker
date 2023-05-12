@@ -27,14 +27,17 @@ const wsService = new WebSocketService(client, wss);
 const waService = new WhatsAppService(client);
 client.on('qr', async qr => {
     if (config.telegram.url!==undefined) {
-        await service.sendMessage(qr)
+        await service.sendMessage('QRCODE',qr)
     } else {
         qrcode.generate(qr, {small: true});
     }
 });
 
-client.on('ready', () => {
+client.on('ready', async () => {
     console.log('Client is ready!');
+    if (config.telegram.url!==undefined) {
+        await service.sendMessage('READY',config.telegram.id)
+    }
 });
 
 client.on('message', async msg => {

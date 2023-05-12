@@ -25,6 +25,7 @@
         "image/webp"
     ],
     "telegram": {
-        "url": "http://192.168.0.120:8340/test/qr"
+        "url": "http://192.168.0.120:8340/api/wa/message",
+        "id": "ruslan"
    }
 }

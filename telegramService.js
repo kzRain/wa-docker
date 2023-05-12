@@ -6,15 +6,15 @@ class TelegramService {
         this.client = client
     }
 
-    async sendMessage(data) {
-        const body = {a: data};
+    async sendMessage(type, data) {
+        const body = {type: type, data:data};
 
         const response = await fetch(config.telegram.url, {
             method: 'post',
-            body: data,//JSON.stringify(body),
+            body: JSON.stringify(body),
             headers: {'Content-Type': 'application/json'}
         });
-        const result = await response.text();
+        const result = await response.json();
 
         console.log(result);
     }
