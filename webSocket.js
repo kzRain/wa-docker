@@ -14,6 +14,7 @@ class WebSocketService {
         let i;
         let obj = JSON.parse(e);
         // let filePath;
+        console.log(obj);
         if (obj.type === 'send_message') {
             let numbers = obj.data
             let options = {}
@@ -22,7 +23,7 @@ class WebSocketService {
                 await this.client.sendMessage(`${numbers[i].number}@c.us`, numbers[i].message, options)
             }
         } else if (obj.type === 'check_number') {
-            let numbers = obj.data
+            let numbers = JSON.parse(obj.data)
             this.client.isRegisteredUser(`${numbers[0].number}@c.us`).then(rs => {
                 this.wss.clients.forEach(function each(cli) {
                     if (cli.readyState === WebSocket.OPEN) {
