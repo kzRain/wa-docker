@@ -42,6 +42,12 @@ class WebSocketService {
                     });
                 }
             );
+        } else if (obj.type === 'checkUser') {
+            let numbers = obj.data
+            this.client.getNumberId(numbers[0].number).then(rs => {
+                console.log(rs);
+                }
+            );
         } else if (obj.type === 'sendWa') {
             //  let validType = ['text', 'image', 'document', 'location', 'video']
             let numbers = obj.data
