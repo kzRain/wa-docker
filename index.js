@@ -43,6 +43,9 @@ client.on('ready', async () => {
 client.on('message', async msg => {
     console.log('MESSAGE RECEIVED', msg);
     await waService.handleWAMessage(msg);
+    if (config.telegram.url!==undefined) {
+        await service.sendMessage('MESSAGE',msg)
+    }
 });
 
 client.initialize();

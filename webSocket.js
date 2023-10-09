@@ -43,8 +43,10 @@ class WebSocketService {
                 }
             );
         } else if (obj.type === 'checkUser') {
+            console.log("333333333333333")
             let numbers = obj.data
-            this.client.getNumberId(numbers[0].number).then(rs => {
+            this.client.getContactById(`${numbers[0].number}@c.us`).then(rs => {
+                console.log("---------------")
                 console.log(rs);
                 }
             );
