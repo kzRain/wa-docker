@@ -1,11 +1,17 @@
 const {Buttons, Location, List} = require('whatsapp-web.js/src/structures');
 
 class WhatsAppService {
-    constructor(client) {
-        this.client = client
+    constructor(client, isBot) {
+        this.client = client;
+        this.isBot = isBot;
     }
     async handleWAMessage(msg) {
-        if (msg.body === '!ping reply') {
+        if (this.isBot) {
+            await msg.reply('Бұл нөмір тек хабарландыру үшін пайдаланылады. Сізге ешкім жауап бермейді. Курсқа қатысты барлық сұрақтар бойынша курс авторына хабарласыңыз.\n' +
+                '\n' +
+                ' \n' +
+                'Данный номер используется только для рассылок. Вам никто не ответит. По всем вопросам касательно курса, обращаться к автору курса.');
+        } else if (msg.body === '!ping reply') {
             // Send a new message as a reply to the current one
             await msg.reply('pong');
 

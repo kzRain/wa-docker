@@ -11,6 +11,8 @@ const client = new Client({
     puppeteer: config.puppeteer
 });
 
+const isBot = config.isBot;
+
 const wss = new WebSocketServer({
     port: config.websocketPort
 })
@@ -24,7 +26,7 @@ wss.on('connection', ws => {
 
 const service = new TelegramService(client);
 const wsService = new WebSocketService(client, wss);
-const waService = new WhatsAppService(client);
+const waService = new WhatsAppService(client, isBot);
 client.on('qr', async qr => {
     if (config.telegram.url!==undefined) {
         await service.sendMessage('QRCODE',qr)
