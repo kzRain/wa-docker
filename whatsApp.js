@@ -6,7 +6,7 @@ class WhatsAppService {
         this.isBot = isBot;
     }
     async handleWAMessage(msg) {
-        if (this.isBot) {
+        if (this.isBot&&msg.type=='chat') {
             await msg.reply('Бұл нөмір тек хабарландыру үшін пайдаланылады. Сізге ешкім жауап бермейді. Курсқа қатысты барлық сұрақтар бойынша курс авторына хабарласыңыз.\n' +
                 '\n' +
                 ' \n' +
