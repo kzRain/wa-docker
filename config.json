@@ -28,5 +28,5 @@
         "url": "http://localhost:8340/api/wa/message",
         "id": "ruslan"
    },
-    "isBot": false;
+    "isBot": false
 }
