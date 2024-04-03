@@ -8,7 +8,11 @@ const { WebSocketServer} = require('ws')
 const { Client, LocalAuth, MessageMedia } = require('whatsapp-web.js');
 const client = new Client({
     authStrategy: new LocalAuth(),
-    puppeteer: config.puppeteer
+    puppeteer: config.puppeteer,
+    webVersionCache: {
+    type: 'remote',
+        remotePath: 'https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/2.2410.1.html',
+}
 });
 
 const isBot = config.isBot;
