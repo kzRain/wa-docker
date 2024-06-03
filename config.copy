@@ -26,7 +26,7 @@
     ],
     "telegram": {
         "url": "https://tg.courstore.com/api/wa/message",
-        "id": "ruslan"
+        "id": "rauan"
    },
     "isBot": false
 }
